@@ -1,35 +1,70 @@
 package DataBase;
-
-
+import java.util.* ; 
+import myClass.* ; 
 /**
- * LibDB 클래스의 설명을 작성하세요.
+ * LibDB<T> 클래스 : 책 DB와 이용자 DB를 만들어내기 위한 제네릭 클래스 
  *
- * @author (작성자 이름)
- * @version (버전 번호 또는 작성한 날짜)
+ * @author (2025957072 강서윤, 2025320070 복창희)
+ * @version (2026-10-04)
  */
-public class LibDB<T >
+public class LibDB<T extends DB_Element>
 {
-    // 인스턴스 변수 - 다음의 예제를 사용자에 맞게 변경하세요.
-    private int x;
-
+    // 어떤 타입도 저장 가능한 ArrayList 생성 
+    private ArrayList<T> db = new ArrayList<T> () ; 
+    
     /**
      * LibDB 클래스의 객체 생성자
      */
     public LibDB()
     {
-        // 인스턴스 변수 초기화
-        x = 0;
+        ArrayList<T> db = new ArrayList<T> () ;  // db에 제네릭 타입의 ArrayList를 생성 후 참조시킴 
     }
 
     /**
-     * 예제 메소드 - 이 주석을 사용자에 맞게 바꾸십시오
+     * addElement() : DB에 요소(객체)를 추가하는 메소드 
      *
-     * @param  y  메소드의 샘플 파라미터
-     * @return    x 더하기 y의 결과값을 반환
+     * @param     추가할 요소 객체 T (Book 또는 User)
+     * @return    void
      */
-    public int sampleMethod(int y)
+
+    public void addElement(T element)
     {
-        // 여기에 코드를 작성하세요.
-        return x + y;
+        db.add(element) ; 
     }
+
+    /**
+     * findElement() : ID를 이용하여 DB내에 해당 ID를 보유한 객체를 검색하는 메소드 
+     *
+     * @param   ID 값 (책의 등록 번호 or 이용자 학번)
+     * @return  DB 내 객체 반환 (T) 
+     */
+  
+    public T findElement(String ID)
+    {
+        // Iterator 실행
+        Iterator<T> it = db.iterator() ; 
+
+        T object = null; 
+        
+        while(it.hasNext()) {
+            object = it.next()  ;  // DB 내 객체를 하나씩 읽어옴 
+
+            // ID 와 객체의 id(학번 또는 책 등록번호) 가 일치한다면 해당 객체를 반환 !
+            if (ID.equals(object.getID())) {
+                break ; 
+            }
+        }
+        return object ; 
+    }
+
+    /**
+     * printAllElement() : DB의 객체 정보를 전부 출력하는 메소드
+     */
+    public void printAllElements()
+    {
+        for (T object : db){
+            System.out.println(object.toString()); 
+        }
+    }
+
 }

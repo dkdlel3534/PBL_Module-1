@@ -1,18 +1,12 @@
 package myClass;
-
 /**
- * DB_Element 클래스의 설명을 작성하세요.
+ * DB_Element 클래스 : Book 클래스와 User 클래스가 사용할 getID()를 제시해놓은 추상클래스
  *
- * @author (작성자 이름)
- * @version (버전 번호 또는 작성한 날짜)
+ * @author (20252320070 복창희)
+ * @version (2026-10-04)
  */
 abstract public class DB_Element
 {
-    /**
-     * DB_Element 클래스의 객체 생성자
-     */
-    public DB_Element()
-    {
-       
-    }
+    // 추상 메소드
+    abstract public String getID();
 }
